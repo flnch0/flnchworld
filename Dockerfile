@@ -15,6 +15,12 @@ RUN \
   apt-get install -y build-essential && \
   apt-get install -y software-properties-common && \
   apt-get install -y byobu curl git htop man unzip vim wget && \
+  wget -O tserver.zip "https://terraria.org/system/dedicated_servers/archives/000/000/036/original/terraria-server-1402.zip" && \
+  unzip tserver.zip && \
+  rm tserver.zip && \
+  chmod +x '/1402/Linux/TerrariaServer.bin.x86_64' && \
+  rm -rf /1402/Mac && \
+  rm -rf /1402/Windows
   rm -rf /var/lib/apt/lists/*
 
 # Add files.
@@ -27,6 +33,9 @@ ENV HOME /root
 
 # Define working directory.
 WORKDIR /root
+
+COPY runthis.sh       /
+COPY serverconfig.txt /
 
 # Define default command.
 CMD ["bash"]
